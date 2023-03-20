@@ -20,6 +20,7 @@ require('packer').startup(function(use)
     'tpope/vim-fugitive',
     'psliwka/vim-smoothie', -- Smooth scrolling
     {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate'},
+    'eandrju/cellular-automaton.nvim',
   }
 
   for _, plugin in pairs(plugins) do

@@ -13,7 +13,8 @@ end
 vim.keymap.set('n', '<C-n>', ':bn<CR>') -- Next buffer in list
 vim.keymap.set('n', '<C-p>', ':bp<CR>') -- Previous buffer in list
 vim.keymap.set('n', '<C-s>', ':b#<CR>') -- Previous buffer you were in, <C-#>
-vim.keymap.set('n', '<C-i>', ':NERDTreeToggle<CR>') -- Previous buffer you were in, <C-#>
+vim.keymap.set('n', '<C-i>', ':NERDTreeToggle<CR>') -- Toggle sidebar
+
 
 -- Center cursor after movements
 --[[
@@ -22,6 +23,8 @@ vim.keymap.set('n', '<C-u>', '<C-u>zz', opts)
 --]]
 
 vim.g.mapleader = ';'
+
+vim.keymap.set('n', '<leader>f', ':NERDTreeFind<CR>') -- Focus sidebar on current file
 
 local fzf_keys = {
     ['<leader><space>'] = ':Files<CR>',
@@ -43,3 +46,7 @@ end
 -- Surround selection with parentheses or quotes
 vim.keymap.set('v', '((', '"sc(<C-r>s)<Esc>', opts)
 vim.keymap.set('v', '""', '"sc"<C-r>s"<Esc>', opts)
+
+
+-- Cellular automaton
+vim.keymap.set("n", "<leader>fml", "<cmd>CellularAutomaton make_it_rain<CR>")
