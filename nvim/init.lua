@@ -16,11 +16,16 @@ require('packer').startup(function(use)
     {'junegunn/fzf', run = ':call fzf#install()'},
     'junegunn/fzf.vim',
     'neovim/nvim-lspconfig',
-    'chriskempson/base16-vim',
     'tpope/vim-fugitive',
     'psliwka/vim-smoothie', -- Smooth scrolling
     {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate'},
     'eandrju/cellular-automaton.nvim',
+
+    'ellisonleao/gruvbox.nvim',
+    'edeneast/nightfox.nvim',
+    'catppuccin/nvim',
+    'folke/tokyonight.nvim',
+    'sainnhe/everforest',
   }
 
   for _, plugin in pairs(plugins) do
@@ -47,7 +52,7 @@ for k, v in pairs(options) do
 end
 
 require('nvim-treesitter.configs').setup {
-  ensure_installed = {"help", "c", "cpp", "python", "lua"},
+  ensure_installed = {"help", "c", "cpp", "python", "lua", "rust"},
   highlight = {
     enable = true,
   },
@@ -78,7 +83,9 @@ vim.cmd[[
 --]]
 
 -- Set color scheme
-vim.cmd.colorscheme "base16-ocean"
+--vim.cmd.colorscheme "base16-ocean"
+--vim.o.background = "dark"
+vim.cmd.colorscheme "catppuccin-macchiato"
 
 -- Make background same as terminal
 for _, hl_group in pairs({
