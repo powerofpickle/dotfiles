@@ -7,6 +7,9 @@ if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
   vim.cmd [[packadd packer.nvim]]
 end
 
+-- Unless you are still migrating, remove the deprecated commands from v1.x
+vim.cmd([[ let g:neo_tree_remove_legacy_commands = 1 ]])
+
 require('packer').startup(function(use)
   use 'wbthomason/packer.nvim'
 
@@ -26,12 +29,28 @@ require('packer').startup(function(use)
     'catppuccin/nvim',
     'folke/tokyonight.nvim',
     'sainnhe/everforest',
+
+    {
+      "nvim-neo-tree/neo-tree.nvim",
+       branch = "v2.x",
+       requires = {
+         "nvim-lua/plenary.nvim",
+         "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
+         "MunifTanjim/nui.nvim",
+       }
+    },
+    {
+      'nvim-telescope/telescope.nvim', tag = '0.1.1',
+      requires = { {'nvim-lua/plenary.nvim'} }
+    }
   }
 
   for _, plugin in pairs(plugins) do
     use(plugin)
   end
+
 end)
+
 
 local options = {
   expandtab = true,
