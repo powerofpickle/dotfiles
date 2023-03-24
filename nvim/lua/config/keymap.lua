@@ -24,23 +24,6 @@ vim.g.mapleader = ';'
 
 vim.keymap.set('n', '<leader>f', ':NERDTreeFind<CR>') -- Focus sidebar on current file
 
-local fzf_keys = {
-    ['<leader><space>'] = ':Files<CR>',
-    ['<leader>b'] = ':Buffers<CR>',
-    ['<leader>w'] = ':Windows<CR>',
-    ['<leader>;'] = ':BLines<CR>',
-    ['<leader>o'] = ':BTags<CR>',
-    ['<leader>t'] = ':Tags<CR>',
-    ['<leader>?'] = ':History<CR>',
-    ['<leader>/'] = ':execute \'Ag \' . input(\'Ag/\')<CR>',
-    ['<leader>.'] = ':AgIn ',
-    ['<leader>r'] = ':Rg<CR>'
-}
-
-for lhs, rhs in pairs(fzf_keys) do
-    vim.keymap.set('n', lhs, rhs, opts)
-end
-
 -- Surround selection with parentheses or quotes
 vim.keymap.set('v', '((', '"sc(<C-r>s)<Esc>', opts)
 vim.keymap.set('v', '""', '"sc"<C-r>s"<Esc>', opts)
@@ -48,17 +31,29 @@ vim.keymap.set('v', '""', '"sc"<C-r>s"<Esc>', opts)
 -- Cellular automaton
 vim.keymap.set("n", "<leader>fml", "<cmd>CellularAutomaton make_it_rain<CR>")
 
--- Telescope
 local builtin = require('telescope.builtin')
+
+-- Telescope Default Bindings
 vim.keymap.set('n', '<leader>ff', builtin.find_files, {})
 vim.keymap.set('n', '<leader>fg', builtin.live_grep, {})
 vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
 vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
 
-vim.keymap.set('n', '<leader>fr', builtin.resume, {})
-vim.keymap.set('n', '<leader>fp', builtin.builtin, {})
+local telescope_keys = {
+    -- FZF Backwards Compatibility
+    ['<leader><space>'] = builtin.find_files,
+    ['<leader>b'] = builtin.buffers,
+    ['<leader>r'] = builtin.live_grep,
 
-vim.keymap.set('n', '<leader>ls', builtin.lsp_dynamic_workspace_symbols, {})
-vim.keymap.set('n', '<leader>lr', builtin.lsp_references, {})
-vim.keymap.set('n', '<leader>gc', builtin.git_commits, {})
-vim.keymap.set('n', '<leader>gs', builtin.git_status, {})
+    ['<leader>fr'] = builtin.resume,
+    ['<leader>fp'] = builtin.builtin,
+
+    ['<leader>ls'] = builtin.lsp_dynamic_workspace_symbols,
+    ['<leader>lr'] = builtin.lsp_references,
+    ['<leader>gc'] = builtin.git_commits,
+    ['<leader>gs'] = builtin.git_status,
+}
+
+for lhs, rhs in pairs(telescope_keys) do
+    vim.keymap.set('n', lhs, rhs, opts)
+end

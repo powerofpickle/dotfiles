@@ -16,14 +16,13 @@ require('packer').startup(function(use)
   local plugins = {
     'scrooloose/nerdtree',
     'tpope/vim-sleuth',
-    {'junegunn/fzf', run = ':call fzf#install()'},
-    'junegunn/fzf.vim',
     'neovim/nvim-lspconfig',
     'tpope/vim-fugitive',
     'psliwka/vim-smoothie', -- Smooth scrolling
     {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate'},
     'eandrju/cellular-automaton.nvim',
-
+    
+    -- Themes
     'ellisonleao/gruvbox.nvim',
     'edeneast/nightfox.nvim',
     'catppuccin/nvim',
