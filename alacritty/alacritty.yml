@@ -1,3 +1,4 @@
 import:
   - ~/.config/alacritty/catppuccin/catppuccin-macchiato.yml
+  - ~/.config/alacritty/opacity.yml
 
