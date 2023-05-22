@@ -1,0 +1,5 @@
+[Context]
+sockets=!ssh-auth
+devices=!all;dri
+filesystems=~/code;!host
+persistent=AndroidStudioProjects;Android;.android;.java

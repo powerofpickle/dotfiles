@@ -9,6 +9,7 @@ mappings = {
     "sway":             "~/.config/sway",
     "tmux.conf":        "~/.tmux.conf",
     "alacritty":        "~/.config/alacritty",
+    "overrides":        "~/.local/share/flatpak/overrides",
 }
 
 dotfiles_dir = Path(__file__).parent
