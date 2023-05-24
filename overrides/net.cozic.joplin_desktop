@@ -1,2 +1,4 @@
 [Context]
+sockets=!cups;!pulseaudio
 filesystems=!home
+persistent=.
