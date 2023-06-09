@@ -17,6 +17,7 @@ apps = {
     'org.gnome.seahorse.Application',
     'org.inkscape.Inkscape',
     'org.deluge_torrent.deluge',
+    'com.vscodium.codium',
 }
 
 def run(cmd):
