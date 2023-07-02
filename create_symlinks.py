@@ -7,6 +7,7 @@ mappings = {
     "nvim/lua":         "~/.config/nvim/lua",
     "fish/themes":      "~/.config/fish/themes",
     "sway":             "~/.config/sway",
+    "waybar":           "~/.config/waybar",
     "tmux.conf":        "~/.tmux.conf",
     "alacritty":        "~/.config/alacritty",
     "overrides":        "~/.local/share/flatpak/overrides",
