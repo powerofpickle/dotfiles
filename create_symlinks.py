@@ -3,14 +3,15 @@
 from pathlib import Path
 
 mappings = {
-    "nvim/init.lua":    "~/.config/nvim/init.lua",
-    "nvim/lua":         "~/.config/nvim/lua",
-    "fish/themes":      "~/.config/fish/themes",
-    "sway":             "~/.config/sway",
-    "waybar":           "~/.config/waybar",
-    "tmux.conf":        "~/.tmux.conf",
-    "alacritty":        "~/.config/alacritty",
-    "overrides":        "~/.local/share/flatpak/overrides",
+    "nvim/init.lua":                    "~/.config/nvim/init.lua",
+    "nvim/lua":                         "~/.config/nvim/lua",
+    "fish/themes":                      "~/.config/fish/themes",
+    "fish/conf.d/no_greeting.fish":     "~/.config/fish/conf.d/no_greeting.fish",
+    "sway":                             "~/.config/sway",
+    "waybar":                           "~/.config/waybar",
+    "tmux.conf":                        "~/.tmux.conf",
+    "alacritty":                        "~/.config/alacritty",
+    "overrides":                        "~/.local/share/flatpak/overrides",
 }
 
 dotfiles_dir = Path(__file__).parent
