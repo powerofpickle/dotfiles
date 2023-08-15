@@ -12,6 +12,7 @@ mappings = {
     "tmux.conf":                        "~/.tmux.conf",
     "alacritty":                        "~/.config/alacritty",
     "overrides":                        "~/.local/share/flatpak/overrides",
+    "mimeapps.list":                    "~/.config/mimeapps.list",
 }
 
 dotfiles_dir = Path(__file__).parent
