@@ -11,13 +11,19 @@ apps = {
     'org.gimp.GIMP',
     'com.github.tchx84.Flatseal',
     'com.github.Eloston.UngoogledChromium',
-    'org.prismlauncher.PrismLauncher',
     'com.google.AndroidStudio',
     'com.nextcloud.desktopclient.nextcloud',
     'org.gnome.seahorse.Application',
     'org.inkscape.Inkscape',
     'org.deluge_torrent.deluge',
     'com.vscodium.codium',
+
+    # Games
+    'org.xonotic.Xonotic',
+    'net.veloren.airshipper',
+    'org.DolphinEmu.dolphin-emu',
+    'net.minetest.Minetest',
+    'org.prismlauncher.PrismLauncher',
 }
 
 def run(cmd):
