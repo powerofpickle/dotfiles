@@ -17,6 +17,9 @@ apps = {
     'org.inkscape.Inkscape',
     'org.deluge_torrent.deluge',
     'com.vscodium.codium',
+    'org.blender.Blender',
+    'org.godotengine.Godot',
+    'com.github.xournalpp.xournalpp',
 
     # Games
     'org.xonotic.Xonotic',
