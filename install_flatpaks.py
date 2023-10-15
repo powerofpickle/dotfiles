@@ -2,32 +2,10 @@
 
 import subprocess
 
-apps = {
-    'net.cozic.joplin_desktop',
-    'io.gitlab.librewolf-community',
-    'org.libreoffice.LibreOffice',
-    'org.signal.Signal',
-    'com.obsproject.Studio',
-    'org.gimp.GIMP',
-    'com.github.tchx84.Flatseal',
-    'com.github.Eloston.UngoogledChromium',
-    'com.google.AndroidStudio',
-    'com.nextcloud.desktopclient.nextcloud',
-    'org.gnome.seahorse.Application',
-    'org.inkscape.Inkscape',
-    'org.deluge_torrent.deluge',
-    'com.vscodium.codium',
-    'org.blender.Blender',
-    'org.godotengine.Godot',
-    'com.github.xournalpp.xournalpp',
+with open('/etc/flatpaks') as f:
+    flatpaks_config = f.read()
 
-    # Games
-    'org.xonotic.Xonotic',
-    'net.veloren.airshipper',
-    'org.DolphinEmu.dolphin-emu',
-    'net.minetest.Minetest',
-    'org.prismlauncher.PrismLauncher',
-}
+apps = set(line for line in flatpaks_config.splitlines() if line and not line.startswith('#'))
 
 def run(cmd):
     return subprocess.check_output(cmd.split()).decode()
