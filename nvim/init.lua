@@ -1,56 +1,48 @@
--- Install packer if not installed
-local install_path = vim.fn.stdpath 'data' .. '/site/pack/packer/start/packer.nvim'
-local is_bootstrap = false
-if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
-  is_bootstrap = true
-  vim.fn.execute('!git clone https://github.com/wbthomason/packer.nvim ' .. install_path)
-  vim.cmd [[packadd packer.nvim]]
-end
 
 -- Unless you are still migrating, remove the deprecated commands from v1.x
 vim.cmd([[ let g:neo_tree_remove_legacy_commands = 1 ]])
 
-require('packer').startup(function(use)
-  use 'wbthomason/packer.nvim'
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not vim.loop.fs_stat(lazypath) then
+  vim.fn.system({
+    "git",
+    "clone",
+    "--filter=blob:none",
+    "https://github.com/folke/lazy.nvim.git",
+    "--branch=stable", -- latest stable release
+    lazypath,
+  })
+end
+vim.opt.rtp:prepend(lazypath)
 
-  local plugins = {
-    'scrooloose/nerdtree',
-    'tpope/vim-sleuth',
-    'neovim/nvim-lspconfig',
-    'tpope/vim-fugitive',
-    'psliwka/vim-smoothie', -- Smooth scrolling
-    {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate'},
-    'eandrju/cellular-automaton.nvim',
-    'ojroques/nvim-osc52', -- Copy paste through terminal
-    
-    -- Themes
-    'ellisonleao/gruvbox.nvim',
-    'edeneast/nightfox.nvim',
-    'catppuccin/nvim',
-    'folke/tokyonight.nvim',
-    'sainnhe/everforest',
+require("lazy").setup({
+  'scrooloose/nerdtree',
+  'tpope/vim-sleuth',
+  'neovim/nvim-lspconfig',
+  'tpope/vim-fugitive',
+  --'psliwka/vim-smoothie', -- Smooth scrolling
+  {'nvim-treesitter/nvim-treesitter'},
+  --'eandrju/cellular-automaton.nvim',
+  'ojroques/nvim-osc52', -- Copy paste through terminal
 
-    {
-      "nvim-neo-tree/neo-tree.nvim",
-       branch = "v2.x",
-       requires = {
-         "nvim-lua/plenary.nvim",
-         "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
-         "MunifTanjim/nui.nvim",
-       }
-    },
-    {
-      'nvim-telescope/telescope.nvim', tag = '0.1.1',
-      requires = { {'nvim-lua/plenary.nvim'} }
-    }
-  }
+  -- Themes
+  'ellisonleao/gruvbox.nvim',
+  'edeneast/nightfox.nvim',
+  'catppuccin/nvim',
+  'folke/tokyonight.nvim',
+  'sainnhe/everforest',
+  {
+    'nvim-telescope/telescope.nvim',
+    requires = { {'nvim-lua/plenary.nvim'} }
+  },
+  'nvim-tree/nvim-web-devicons',
+  'nvim-tree/nvim-tree.lua',
+  {
+    'nvim-telescope/telescope-file-browser.nvim',
+    dependencies = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" },
+  },
 
-  for _, plugin in pairs(plugins) do
-    use(plugin)
-  end
-
-end)
-
+})
 
 local options = {
   expandtab = true,
@@ -86,12 +78,29 @@ require('nvim-treesitter.configs').setup {
   },
 }
 
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
+
+require("nvim-tree").setup {
+  view = {
+    preserve_window_proportions = true,
+  },
+  actions = {
+    open_file = {
+      resize_window = false,
+    },
+  },
+}
+
+
+--[[
 -- From https://shapeshed.com/vim-netrw/
 vim.g.netrw_banner = 0
 vim.g.netrw_liststyle = 3
 vim.g.netrw_browse_split = 4
 vim.g.netrw_altv = 4
 vim.g.netrw_winsize = 25
+--//
 --[[
 vim.cmd[[
   augroup ProjectDrawer
