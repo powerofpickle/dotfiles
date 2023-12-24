@@ -42,7 +42,7 @@ local lsp_flags = {
 -- End copied section
 
 local nvim_lsp = require('lspconfig')
-local servers = { 'clangd', 'pylsp', 'gopls', 'svls' }
+local servers = { 'clangd', 'pylsp', 'gopls', 'svls', 'lua_ls' }
 for _, lsp in ipairs(servers) do
   nvim_lsp[lsp].setup {
     on_attach = on_attach,
