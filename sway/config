@@ -8,8 +8,8 @@
 #
 # Logo key. Use Mod1 for Alt.
 # CHANGE FROM DEFAULT
-# set $mod Mod4
-set $mod Mod1
+set $mod Mod4
+#set $mod Mod1
 # Home row direction keys, like vim
 set $left h
 set $down j
