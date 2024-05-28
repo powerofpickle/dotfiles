@@ -21,7 +21,10 @@ require("lazy").setup({
   'neovim/nvim-lspconfig',
   'tpope/vim-fugitive',
   --'psliwka/vim-smoothie', -- Smooth scrolling
-  {'nvim-treesitter/nvim-treesitter'},
+  {
+    'nvim-treesitter/nvim-treesitter',
+    lazy = false
+  },
   --'eandrju/cellular-automaton.nvim',
   'ojroques/nvim-osc52', -- Copy paste through terminal
 
@@ -63,7 +66,7 @@ for k, v in pairs(options) do
 end
 
 require('nvim-treesitter.configs').setup {
-  ensure_installed = {"c", "cpp", "python", "lua", "rust", "nix", "kotlin"},
+  ensure_installed = {"c", "cpp", "python", "lua", "rust", "nix", "kotlin", "tablegen"},
   highlight = {
     enable = true,
   },
