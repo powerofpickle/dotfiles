@@ -13,8 +13,8 @@ vim.keymap.set('n', '<C-n>', ':bn<CR>') -- Next buffer in list
 vim.keymap.set('n', '<C-p>', ':bp<CR>') -- Previous buffer in list
 vim.keymap.set('n', '<C-s>', ':b#<CR>') -- Previous buffer you were in, <C-#>
 
-vim.keymap.set('n', '<C-i>', ':NERDTreeToggle<CR>') -- Toggle sidebar
---vim.keymap.set('n', '<C-i>', ':NvimTreeToggle<CR>') -- Toggle sidebar
+--vim.keymap.set('n', '<C-i>', ':NERDTreeToggle<CR>') -- Toggle sidebar
+vim.keymap.set('n', '<C-i>', ':NvimTreeToggle<CR>') -- Toggle sidebar
 
 -- Center cursor after movements
 --[[

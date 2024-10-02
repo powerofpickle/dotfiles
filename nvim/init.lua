@@ -1,7 +1,3 @@
-
--- Unless you are still migrating, remove the deprecated commands from v1.x
-vim.cmd([[ let g:neo_tree_remove_legacy_commands = 1 ]])
-
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
   vim.fn.system({
@@ -15,7 +11,7 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
-require("lazy").setup({
+local lazy_config = {
   'scrooloose/nerdtree',
   'tpope/vim-sleuth',
   'neovim/nvim-lspconfig',
@@ -44,8 +40,83 @@ require("lazy").setup({
     'nvim-telescope/telescope-file-browser.nvim',
     dependencies = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" },
   },
+  {
+    "kelly-lin/ranger.nvim",
+    config = function()
+      require("ranger-nvim").setup({ replace_netrw = true })
+      vim.api.nvim_set_keymap("n", ";ef", "", {
+        noremap = true,
+        callback = function()
+          require("ranger-nvim").open(true)
+        end,
+      })
+      vim.api.nvim_set_keymap("n", ";eg", "", {
+        noremap = true,
+        callback = function()
+          require("ranger-nvim").open(false)
+        end,
+      })
+    end,
+  },
+}
 
-})
+local enable_avante = false
+
+if enable_avante then
+  lazy_config[#lazy_config+1] = {
+    "yetone/avante.nvim",
+    event = "VeryLazy",
+    lazy = false,
+    version = false, -- set this if you want to always pull the latest change
+    opts = {
+      claude = {
+        api_key_name = "cmd:anthropic-key",
+      },
+      hints = { enabled = false },
+      -- add any opts here
+    },
+    -- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
+    build = "make",
+    -- build = "powershell -ExecutionPolicy Bypass -File Build.ps1 -BuildFromSource false" -- for windows
+    dependencies = {
+      "stevearc/dressing.nvim",
+      "nvim-lua/plenary.nvim",
+      "MunifTanjim/nui.nvim",
+      --- The below dependencies are optional,
+      "nvim-tree/nvim-web-devicons", -- or echasnovski/mini.icons
+      "zbirenbaum/copilot.lua", -- for providers='copilot'
+      {
+        -- support for image pasting
+        "HakonHarnes/img-clip.nvim",
+        event = "VeryLazy",
+        opts = {
+          -- recommended settings
+          default = {
+            embed_image_as_base64 = false,
+            prompt_for_file_name = false,
+            drag_and_drop = {
+              insert_mode = true,
+            },
+            -- required for Windows users
+            use_absolute_path = true,
+          },
+        },
+      },
+      {
+          -- Make sure to set this up properly if you have lazy=true
+          'MeanderingProgrammer/render-markdown.nvim',
+          opts = {
+            file_types = { "markdown", "Avante" },
+          },
+          ft = { "markdown", "Avante" },
+        },
+      },
+    }
+end
+
+vim.g.mapleader = ';'
+
+require("lazy").setup(lazy_config)
 
 local options = {
   expandtab = true,
@@ -84,7 +155,37 @@ require('nvim-treesitter.configs').setup {
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 
-require("nvim-tree").setup {
+-- Add cd functionality to nvim-tree
+local function nvim_tree_on_attach(bufnr)
+  local api = require("nvim-tree.api")
+  local core = require("nvim-tree.core")
+  local lib = require("nvim-tree.lib")
+
+  api.config.mappings.default_on_attach(bufnr)
+
+  local function change_pwd()
+    local node = lib.get_node_at_cursor()
+    local path
+    if node.parent == nil then
+      path = core.get_cwd()
+    else
+      path = lib.get_last_group_node(node).absolute_path
+      if node.type ~= "directory" then
+        path = vim.fn.fnamemodify(path, ":h")
+      end
+    end
+    print('Changing PWD to ' .. path)
+    vim.uv.chdir(path)
+  end
+
+  local function opts(desc)
+    return { desc = "nvim-tree: " .. desc, buffer = bufnr, noremap = true, silent = true, nowait = true }
+  end
+
+  vim.keymap.set('n', 'cd', change_pwd, opts('Change PWD'))
+end
+
+require("nvim-tree").setup({
   view = {
     preserve_window_proportions = true,
   },
@@ -93,7 +194,12 @@ require("nvim-tree").setup {
       resize_window = false,
     },
   },
-}
+  on_attach = nvim_tree_on_attach,
+  git = {
+    enable = true,
+    timeout = 400, -- TODO
+  }
+})
 
 
 --[[

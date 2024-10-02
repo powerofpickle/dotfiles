@@ -42,7 +42,7 @@ local lsp_flags = {
 -- End copied section
 
 local nvim_lsp = require('lspconfig')
-local servers = { 'clangd', 'pylsp', 'gopls', 'svls', 'lua_ls', 'hls' }
+local servers = { 'clangd', 'pylsp', 'gopls', 'svls', 'hls' }
 --local servers = { 'clangd', 'pylsp', 'gopls', 'svls' }
 for _, lsp in ipairs(servers) do
   nvim_lsp[lsp].setup {
@@ -50,3 +50,38 @@ for _, lsp in ipairs(servers) do
     flags = lsp_flags,
   }
 end
+
+-- from :help lspconfig-all
+nvim_lsp.lua_ls.setup {
+  on_attach = on_attach,
+  flags = lsp_flags,
+  on_init = function(client)
+    local path = client.workspace_folders[1].name
+    if vim.loop.fs_stat(path..'/.luarc.json') or vim.loop.fs_stat(path..'/.luarc.jsonc') then
+      return
+    end
+
+    client.config.settings.Lua = vim.tbl_deep_extend('force', client.config.settings.Lua, {
+      runtime = {
+        -- Tell the language server which version of Lua you're using
+        -- (most likely LuaJIT in the case of Neovim)
+        version = 'LuaJIT'
+      },
+      -- Make the server aware of Neovim runtime files
+      workspace = {
+        checkThirdParty = false,
+        library = {
+          vim.env.VIMRUNTIME
+          -- Depending on the usage, you might want to add additional paths here.
+          -- "${3rd}/luv/library"
+          -- "${3rd}/busted/library",
+        }
+        -- or pull in all of 'runtimepath'. NOTE: this is a lot slower
+        -- library = vim.api.nvim_get_runtime_file("", true)
+      }
+    })
+  end,
+  settings = {
+    Lua = {}
+  }
+}
