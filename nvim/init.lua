@@ -175,7 +175,7 @@ local function nvim_tree_on_attach(bufnr)
       end
     end
     print('Changing PWD to ' .. path)
-    vim.uv.chdir(path)
+    vim.cmd("cd " .. path)
   end
 
   local function opts(desc)
