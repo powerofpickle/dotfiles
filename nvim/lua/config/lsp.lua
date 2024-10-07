@@ -41,18 +41,16 @@ local lsp_flags = {
 
 -- End copied section
 
-local nvim_lsp = require('lspconfig')
-local servers = { 'clangd', 'pylsp', 'gopls', 'svls', 'hls' }
---local servers = { 'clangd', 'pylsp', 'gopls', 'svls' }
-for _, lsp in ipairs(servers) do
-  nvim_lsp[lsp].setup {
-    on_attach = on_attach,
-    flags = lsp_flags,
-  }
-end
+local servers = {  -- Use default config for these servers
+  'clangd',
+  'pylsp',
+  'gopls',
+  'svls',
+  'hls'
+}
 
 -- from :help lspconfig-all
-nvim_lsp.lua_ls.setup {
+local lua_ls_config = {
   on_attach = on_attach,
   flags = lsp_flags,
   on_init = function(client)
@@ -84,4 +82,21 @@ nvim_lsp.lua_ls.setup {
   settings = {
     Lua = {}
   }
+}
+
+local setup_lspconfig = function()
+  local nvim_lsp = require('lspconfig')
+
+  for _, lsp in ipairs(servers) do
+    nvim_lsp[lsp].setup {
+      on_attach = on_attach,
+      flags = lsp_flags,
+    }
+  end
+
+  nvim_lsp.lua_ls.setup(lua_ls_config)
+end
+
+return {
+  setup = setup_lspconfig,
 }
