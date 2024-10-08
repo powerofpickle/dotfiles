@@ -1,1 +1,4 @@
-import = ["/home/coleman/.config/alacritty/catppuccin/catppuccin-macchiato.toml", "/home/coleman/.config/alacritty/opacity.yml"]
+import = [
+    "~/.config/alacritty/catppuccin/catppuccin-macchiato.toml",
+    "~/.config/alacritty/opacity.yml",
+]
