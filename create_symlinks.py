@@ -4,7 +4,9 @@ from pathlib import Path
 
 mappings = {
     "nvim/init.lua":                    "~/.config/nvim/init.lua",
-    "nvim/lua":                         "~/.config/nvim/lua",
+    "nvim/lua/config":                  "~/.config/nvim/lua/config",
+    "vim/vimrc":                        "~/.config/vim/vimrc",
+    "vim/config":                       "~/.config/vim/config",
     "fish/themes":                      "~/.config/fish/themes",
     #"fish/conf.d/no_greeting.fish":     "~/.config/fish/conf.d/no_greeting.fish",
     "fish/conf.d":                      "~/.config/fish/conf.d",

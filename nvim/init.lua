@@ -20,6 +20,8 @@ for k, v in pairs(options) do
   vim.opt[k] = v
 end
 
+vim.cmd[[source ~/.config/vim/config/options.vim]]
+
 --[[
 -- From https://shapeshed.com/vim-netrw/
 vim.g.netrw_banner = 0
@@ -58,22 +60,6 @@ for _, hl_group in pairs({
   vim.api.nvim_set_hl(0, hl_group, {bg = "none"})
 end
 
--- Remove this once text color issue is fixed
-vim.cmd[[
-  highlight LineNr ctermbg=none guibg=none
-]]
-
--- Show relative numbers when buffer is focused, otherwise show absolute numbers
-vim.cmd[[
-  set number
-  augroup numbertoggle
-    autocmd!
-    autocmd BufEnter,FocusGained,InsertLeave,WinEnter * if &nu && mode() != "i" | set rnu   | endif
-    autocmd BufLeave,FocusLost,InsertEnter,WinLeave   * if &nu                  | set nornu | endif
-  augroup END
-]]
-
-
 -- Remove help indicator at top of NERDTree
 vim.cmd[[let NERDTreeMinimalUI=1]]
 
@@ -89,9 +75,4 @@ vim.cmd[[
   set wildmenu
 ]]
 
--- Disable intro message when vim starts
-vim.cmd[[
-  set shortmess+=I
-]]
-
-require('config.keymap')
+require('config.keymap').setup()

@@ -12,7 +12,7 @@ local function nvim_tree_on_attach(bufnr)
     if node.parent == nil then
       path = core.get_cwd()
     else
-      path = lib.get_last_group_node(node).absolute_path
+      path = node:last_group_node().absolute_path
       if node.type ~= "directory" then
         path = vim.fn.fnamemodify(path, ":h")
       end

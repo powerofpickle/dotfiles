@@ -1,0 +1,4 @@
+source ~/.config/vim/config/options.vim
+source ~/.config/vim/config/keymap.vim
+
+syntax on

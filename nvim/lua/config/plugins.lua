@@ -12,7 +12,6 @@ local plugin_config = {
   'folke/tokyonight.nvim',
   'sainnhe/everforest',
 
-  'ojroques/nvim-osc52', -- Copy paste through terminal
   'nvim-tree/nvim-web-devicons',
   --'eandrju/cellular-automaton.nvim',
   {
@@ -27,7 +26,8 @@ local plugin_config = {
   },
   {
     'nvim-telescope/telescope.nvim',
-    requires = { {'nvim-lua/plenary.nvim'} }
+    requires = { {'nvim-lua/plenary.nvim'} },
+    config = require("config.keymap").setup_telescope,
   },
   {
     'nvim-tree/nvim-tree.lua',

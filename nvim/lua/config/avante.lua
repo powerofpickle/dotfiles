@@ -1,6 +1,6 @@
 local M = {}
 
-M.enable_avante = false
+M.enable_avante = require('config.settings').enable_avante
 
 M.avante_opts = {
   claude = {
