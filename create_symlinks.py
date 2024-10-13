@@ -8,7 +8,6 @@ mappings = {
     "vim/vimrc":                        "~/.config/vim/vimrc",
     "vim/config":                       "~/.config/vim/config",
     "fish/themes":                      "~/.config/fish/themes",
-    #"fish/conf.d/no_greeting.fish":     "~/.config/fish/conf.d/no_greeting.fish",
     "fish/conf.d":                      "~/.config/fish/conf.d",
     "sway":                             "~/.config/sway",
     "waybar":                           "~/.config/waybar",
