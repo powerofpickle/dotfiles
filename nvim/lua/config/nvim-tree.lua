@@ -28,6 +28,8 @@ local function nvim_tree_on_attach(bufnr)
   vim.keymap.set('n', 'cd', change_pwd, opts('Change PWD'))
 end
 
+local performance_mode = require('config.settings').nvim_tree_performance_mode
+
 local nvim_tree_config = {
   view = {
     preserve_window_proportions = true,
@@ -39,9 +41,12 @@ local nvim_tree_config = {
   },
   on_attach = nvim_tree_on_attach,
   git = {
-    enable = true,
+    enable = not performance_mode,
     timeout = 400, -- TODO
-  }
+  },
+  filesystem_watchers = {
+    enable = not performance_mode,
+  },
 }
 
 local setup_nvim_tree = function()
