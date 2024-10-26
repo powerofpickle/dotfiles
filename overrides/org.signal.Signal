@@ -1,2 +1,4 @@
 [Context]
 devices=!all;dri
+filesystems=!host
+persistent=~/Signal
