@@ -2,12 +2,11 @@
 local function nvim_tree_on_attach(bufnr)
   local api = require("nvim-tree.api")
   local core = require("nvim-tree.core")
-  local lib = require("nvim-tree.lib")
 
   api.config.mappings.default_on_attach(bufnr)
 
   local function change_pwd()
-    local node = lib.get_node_at_cursor()
+    local node = core.get_explorer():get_node_at_cursor()
     local path
     if node.parent == nil then
       path = core.get_cwd()
