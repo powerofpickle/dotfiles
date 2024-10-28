@@ -1,5 +1,7 @@
 local M = {}
 
+local prefix = ';'
+
 M.setup = function()
   vim.cmd[[source ~/.config/vim/config/keymap.vim]]
 
@@ -11,7 +13,7 @@ M.setup = function()
   --]]
 
   -- Cellular automaton
-  --vim.keymap.set("n", "<leader>fml", "<cmd>CellularAutomaton make_it_rain<CR>")
+  --vim.keymap.set("n", prefix .. "fml", "<cmd>CellularAutomaton make_it_rain<CR>")
 end
 
 M.setup_nvim_tree = function()
@@ -22,44 +24,44 @@ M.setup_telescope = function()
   local builtin = require('telescope.builtin')
 
   -- Telescope Default Bindings
-  vim.keymap.set('n', '<leader>ff', builtin.find_files, {})
-  vim.keymap.set('n', '<leader>fg', builtin.live_grep, {})
+  vim.keymap.set('n', prefix .. 'ff', builtin.find_files, {})
+  vim.keymap.set('n', prefix .. 'fg', builtin.live_grep, {})
   local buffer_view = function()
     builtin.buffers({
       sort_mru=true,
       ignore_current_buffer=true,
     })
   end
-  vim.keymap.set('n', '<leader>fb', buffer_view, {})
-  vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
+  vim.keymap.set('n', prefix .. 'fb', buffer_view, {})
+  vim.keymap.set('n', prefix .. 'fh', builtin.help_tags, {})
 
   local telescope_keys = {
     -- FZF Backwards Compatibility
-    ['<leader><space>'] = builtin.find_files,
-    ['<leader>b'] = buffer_view,
-    ['<leader>r'] = builtin.live_grep,
+    ['<space>'] = builtin.find_files,
+    ['b'] = buffer_view,
+    ['r'] = builtin.live_grep,
 
-    ['<leader>fr'] = builtin.resume,
-    ['<leader>fp'] = builtin.builtin,
+    ['fr'] = builtin.resume,
+    ['fp'] = builtin.builtin,
 
-    ['<leader>ls'] = builtin.lsp_dynamic_workspace_symbols,
-    ['<leader>lr'] = builtin.lsp_references,
-    ['<leader>gc'] = builtin.git_commits,
-    ['<leader>gbc'] = builtin.git_bcommits,
-    ['<leader>gs'] = builtin.git_status,
+    ['ls'] = builtin.lsp_dynamic_workspace_symbols,
+    ['lr'] = builtin.lsp_references,
+    ['gc'] = builtin.git_commits,
+    ['gbc'] = builtin.git_bcommits,
+    ['gs'] = builtin.git_status,
 
-    ['<leader>j'] = builtin.jumplist,
-    --['<leader>k'] = builtin.keymaps,
-    --['<leader>l'] = builtin.reloader,
+    ['j'] = builtin.jumplist,
+    --['k'] = builtin.keymaps,
+    --['l'] = builtin.reloader,
   }
 
   for lhs, rhs in pairs(telescope_keys) do
-    vim.keymap.set('n', lhs, rhs, opts)
+    vim.keymap.set('n', prefix .. lhs, rhs, opts)
   end
 
   vim.api.nvim_set_keymap(
     "n",
-    "<leader>fb",
+    prefix .. "fb",
     ":Telescope file_browser<CR>",
     { noremap = true }
   )

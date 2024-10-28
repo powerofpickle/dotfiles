@@ -1,4 +1,4 @@
-let mapleader = ';'
+let s:prefix = ';'
 
 " Use ctrl + h/j/k/l to move between panes
 let s:movement_keys = ['h', 'j', 'k', 'l']
@@ -22,6 +22,6 @@ vnoremap "" "sc"<C-r>s"<Esc>
 if !exists(':NvimTreeToggle')
     if exists(':NERDTreeToggle')
         nnoremap <C-i> :NERDTreeToggle<CR>
-        nnoremap <leader>f :NERDTreeFind<CR>
+        execute 'nnoremap ' . s:prefix . 'f :NERDTreeFind<CR>'
     end
 end

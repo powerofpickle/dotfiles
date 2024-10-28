@@ -1,5 +1,3 @@
-vim.g.mapleader = ';'
-
 require("config.plugins").setup()
 
 local options = {
