@@ -23,6 +23,7 @@ local plugin_config = {
     'nvim-treesitter/nvim-treesitter',
     lazy = false,
     config = require("config.treesitter").setup,
+    version = require("config.treesitter").plugin_version(),
   },
   {
     'nvim-telescope/telescope.nvim',
