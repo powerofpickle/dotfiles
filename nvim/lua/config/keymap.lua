@@ -1,28 +1,21 @@
 local M = {}
 
 M.setup = function()
-  local opts = {noremap=true, silent=true}
-
   vim.cmd[[source ~/.config/vim/config/keymap.vim]]
-
-  --vim.keymap.set('n', '<C-i>', ':NERDTreeToggle<CR>') -- Toggle sidebar
-  vim.keymap.set('n', '<C-i>', ':NvimTreeToggle<CR>') -- Toggle sidebar
 
   -- Center cursor after movements
   --[[
+  local opts = {noremap=true, silent=true}
   vim.keymap.set('n', '<C-d>', '<C-d>zz', opts)
   vim.keymap.set('n', '<C-u>', '<C-u>zz', opts)
   --]]
 
-  --vim.g.mapleader = ';'
-  vim.cmd[[
-    let mapleader = ';'
-  ]]
-
-  vim.keymap.set('n', '<leader>f', ':NERDTreeFind<CR>') -- Focus sidebar on current file
-
   -- Cellular automaton
   --vim.keymap.set("n", "<leader>fml", "<cmd>CellularAutomaton make_it_rain<CR>")
+end
+
+M.setup_nvim_tree = function()
+  vim.keymap.set('n', '<C-i>', ':NvimTreeToggle<CR>') -- Toggle sidebar
 end
 
 M.setup_telescope = function()

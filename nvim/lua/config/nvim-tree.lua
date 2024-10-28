@@ -1,9 +1,9 @@
 -- Add cd functionality to nvim-tree
-local function nvim_tree_on_attach(bufnr)
-  local api = require("nvim-tree.api")
-  local core = require("nvim-tree.core")
 
-  api.config.mappings.default_on_attach(bufnr)
+local performance_mode = require('config.settings').nvim_tree_performance_mode
+
+local function add_change_pwd_keymap(bufnr)
+  local core = require("nvim-tree.core")
 
   local function change_pwd()
     local node = core.get_explorer():get_node_at_cursor()
@@ -27,7 +27,16 @@ local function nvim_tree_on_attach(bufnr)
   vim.keymap.set('n', 'cd', change_pwd, opts('Change PWD'))
 end
 
-local performance_mode = require('config.settings').nvim_tree_performance_mode
+local function nvim_tree_on_attach(bufnr)
+  local api = require("nvim-tree.api")
+  api.config.mappings.default_on_attach(bufnr)
+
+  -- Delete default Tab keymap
+  vim.api.nvim_buf_del_keymap(bufnr, "n", "<Tab>")
+
+  -- Add keymap to change PWD
+  add_change_pwd_keymap(bufnr)
+end
 
 local nvim_tree_config = {
   view = {
@@ -51,6 +60,7 @@ local nvim_tree_config = {
 local setup_nvim_tree = function()
   vim.g.loaded_netrw = 1
   vim.g.loaded_netrwPlugin = 1
+  require("config.keymap").setup_nvim_tree()
 
   require("nvim-tree").setup(nvim_tree_config)
 end

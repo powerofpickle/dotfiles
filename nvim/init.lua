@@ -42,7 +42,6 @@ vim.cmd[[
 -- Set color scheme
 --vim.cmd.colorscheme "base16-ocean"
 --vim.o.background = "dark"
-vim.cmd.colorscheme "catppuccin-macchiato"
 
 -- Make background same as terminal
 for _, hl_group in pairs({

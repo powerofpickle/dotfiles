@@ -1,3 +1,5 @@
+let mapleader = ';'
+
 " Use ctrl + h/j/k/l to move between panes
 let s:movement_keys = ['h', 'j', 'k', 'l']
 for key in s:movement_keys
@@ -15,3 +17,11 @@ nnoremap <C-s> :b#<CR>
 " Surround selection with parentheses or quotes
 vnoremap (( "sc(<C-r>s)<Esc>
 vnoremap "" "sc"<C-r>s"<Esc>
+
+" NERDTree keymaps
+if !exists(':NvimTreeToggle')
+    if exists(':NERDTreeToggle')
+        nnoremap <C-i> :NERDTreeToggle<CR>
+        nnoremap <leader>f :NERDTreeFind<CR>
+    end
+end
