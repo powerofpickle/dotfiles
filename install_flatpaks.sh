@@ -1,20 +1,5 @@
 #!/bin/sh
 
-config_file="/etc/flatpaks"
-
-if [ "$#" -gt 0 ]; then
-    config_file="$1"
-fi
-
-if [ ! -f "$config_file" ]; then
-    echo "Error: Configuration file '$config_file' does not exist."
-    exit 1
-fi
-
-flatpaks_config=$(< "$config_file")
-
-apps=$(echo "$flatpaks_config" | awk 'NF && !/^#/{print $0}' | sort -u)
-
 get_installed_apps() {
     flatpak list --app --columns=application | sort -u
 }
@@ -27,28 +12,57 @@ uninstall_flatpak() {
     flatpak uninstall -y "$1"
 }
 
-installed_apps=$(get_installed_apps)
+subtract_set() {
+    # Returns elements that are in $1 and not in $2
+    pattern_file=$(mktemp)
+    printf "%s" "$2" > $pattern_file
+    printf "%s" "$1" | grep -Fvxf $pattern_file
+    rm -f "$pattern_file"
+}
 
-apps_list=$(echo "$apps" | tr '\n' ' ')
-installed_apps_list=$(echo "$installed_apps" | tr '\n' ' ')
+format_list() {
+    printf "%s" "$1" | sed 's/^/ - /'
+}
 
-to_install=$(echo "$apps_list" | tr ' ' '\n' | sort | uniq | grep -Fvxf <(echo "$installed_apps_list" | tr ' ' '\n') | tr '\n' ' ')
-to_uninstall=$(echo "$installed_apps_list" | tr ' ' '\n' | sort | uniq | grep -Fvxf <(echo "$apps_list" | tr ' ' '\n') | tr '\n' ' ')
+main() {
+    config_file="/etc/flatpaks"
 
-if [ -n "$to_install" ]; then
-    read -p "Will install the following applications: $to_install. Press Enter to continue..."
-    for app in $to_install; do
-        echo "Installing $app"
-        install_flatpak "$app"
-    done
-fi
+    if [ "$#" -gt 0 ]; then
+        config_file="$1"
+    fi
 
-if [ -n "$to_uninstall" ]; then
-    read -p "Will uninstall the following applications: $to_uninstall. Press Enter to continue..."
-    for app in $to_uninstall; do
-        echo "Uninstalling $app"
-        uninstall_flatpak "$app"
-    done
-fi
+    if [ ! -f "$config_file" ]; then
+        printf "Error: Configuration file '$config_file' does not exist.\n"
+        exit 1
+    fi
 
-echo "Done"
+    flatpaks_config=$(cat "$config_file")
+
+    apps=$(printf "%s" "$flatpaks_config" | awk 'NF && !/^#/{print $0}' | sort -u)
+    installed_apps=$(get_installed_apps)
+
+    to_install=$(subtract_set "$apps" "$installed_apps")
+    to_uninstall=$(subtract_set "$installed_apps" "$apps")
+
+    if [ -n "$to_install" ]; then
+        printf "Will install the following applications:\n%s\n\nPress Enter to continue" "$(format_list "$to_install")"
+        read -r _
+        for app in $to_install; do
+            printf "Installing %s\n" "$app"
+            install_flatpak "$app"
+        done
+    fi
+
+    if [ -n "$to_uninstall" ]; then
+        printf "Will uninstall the following applications:\n%s\n\nPress Enter to continue" "$(format_list "$to_uninstall")"
+        read -r _
+        for app in $to_uninstall; do
+            printf "Uninstalling %s\n" "$app"
+            uninstall_flatpak "$app"
+        done
+    fi
+
+    printf "Done\n"
+}
+
+main "$@"
