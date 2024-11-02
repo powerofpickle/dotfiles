@@ -15,8 +15,8 @@ uninstall_flatpak() {
 subtract_set() {
     # Returns elements that are in $1 and not in $2
     pattern_file=$(mktemp)
-    printf "%s" "$2" > $pattern_file
-    printf "%s" "$1" | grep -Fvxf $pattern_file
+    printf "%s" "$2" > "$pattern_file"
+    printf "%s" "$1" | grep -Fvxf "$pattern_file"
     rm -f "$pattern_file"
 }
 
@@ -32,7 +32,7 @@ main() {
     fi
 
     if [ ! -f "$config_file" ]; then
-        printf "Error: Configuration file '$config_file' does not exist.\n"
+        printf "Error: Configuration file '%s' does not exist.\n" "$config_file"
         exit 1
     fi
 
