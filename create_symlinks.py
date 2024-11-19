@@ -15,6 +15,7 @@ mappings = {
     "alacritty":                        "~/.config/alacritty",
     "overrides":                        "~/.local/share/flatpak/overrides",
     "mimeapps.list":                    "~/.config/mimeapps.list",
+    "python/pdbrc":                     "~/.pdbrc",
 }
 
 dotfiles_dir = Path(__file__).parent

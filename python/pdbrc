@@ -1,0 +1,4 @@
+!import os; exec(open(os.path.expanduser(os.getenv('PYTHONSTARTUP'))).read(), globals())
+alias mklist !mklist(%1)
+alias pl !mklist(%1)
+alias pcmd !print_shell_cmd(%1)
