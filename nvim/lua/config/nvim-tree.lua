@@ -4,6 +4,7 @@ local performance_mode = require('config.settings').nvim_tree_performance_mode
 
 local function add_change_pwd_keymap(bufnr)
   local core = require("nvim-tree.core")
+  local DirectoryNode = require("nvim-tree.node.directory")
 
   local function change_pwd()
     local node = core.get_explorer():get_node_at_cursor()
@@ -11,9 +12,13 @@ local function add_change_pwd_keymap(bufnr)
     if node.parent == nil then
       path = core.get_cwd()
     else
-      path = node:last_group_node().absolute_path
-      if node.type ~= "directory" then
-        path = vim.fn.fnamemodify(path, ":h")
+      if node:is(DirectoryNode) then
+        path = node:as(DirectoryNode):last_group_node().absolute_path
+      else
+        path = vim.fn.fnamemodify(
+          node.absolute_path,
+          ":h"
+        )
       end
     end
     print('Changing PWD to ' .. path)
