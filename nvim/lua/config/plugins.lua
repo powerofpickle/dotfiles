@@ -33,6 +33,7 @@ local plugin_config = {
   {
     'nvim-tree/nvim-tree.lua',
     config = require("config.nvim-tree").setup,
+    version = "*",
   },
   {
     'nvim-telescope/telescope-file-browser.nvim',
