@@ -1,6 +1,10 @@
 " Disable intro message when vim starts
 set shortmess+=I
 
+" Enhance command completion
+set wildmenu
+set wildmode=longest:full,full
+
 " Show relative numbers when buffer is focused, otherwise show absolute numbers
 set number
 augroup numbertoggle
@@ -30,3 +34,4 @@ function! s:set_colorscheme(colorschemes) abort
 endfunction
 
 call s:set_colorscheme(colorschemes)
+

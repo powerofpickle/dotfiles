@@ -69,7 +69,6 @@ vim.cmd[[set completeopt-=preview]]
 
 vim.cmd[[
   set path+=**
-  set wildmenu
 ]]
 
 require('config.keymap').setup()

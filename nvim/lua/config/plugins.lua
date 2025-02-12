@@ -1,9 +1,10 @@
 local plugin_config = {
   -- vim plugins
+  --'psliwka/vim-smoothie', -- Smooth scrolling
   'scrooloose/nerdtree',
   'tpope/vim-sleuth',
   'tpope/vim-fugitive',
-  --'psliwka/vim-smoothie', -- Smooth scrolling
+  'Vimjas/vim-python-pep8-indent',
 
   -- Themes
   'ellisonleao/gruvbox.nvim',
@@ -57,7 +58,22 @@ local plugin_config = {
       })
     end,
   },
+  {
+    "lukas-reineke/indent-blankline.nvim",
+    main = "ibl",
+    ---@module "ibl"
+    ---@type ibl.config
+    opts = {
+      scope = { enabled = false },
+    },
+  }
 }
+
+if require('config.settings').enable_copilot then
+  plugin_config[#plugin_config+1] = {
+    'github/copilot.vim',
+  }
+end
 
 if require('config.avante').enable_avante then
   local avante_config = require('config.avante').lazy_config(
