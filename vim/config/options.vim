@@ -13,6 +13,10 @@ augroup numbertoggle
     autocmd BufLeave,FocusLost,InsertEnter,WinLeave   * if &nu                  | set nornu | endif
 augroup END
 
+" https://stackoverflow.com/questions/19320747/prevent-vim-from-indenting-line-when-typing-a-colon-in-python
+autocmd FileType python setlocal indentkeys-=<:>
+autocmd FileType python setlocal indentkeys-=:
+
 " colorschemes in order of preference
 let colorschemes = [
     \ 'catppuccin-macchiato',
