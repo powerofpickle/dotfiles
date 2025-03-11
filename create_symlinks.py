@@ -11,6 +11,7 @@ mappings = {
     "fish/conf.d":                      "~/.config/fish/conf.d",
     "sway":                             "~/.config/sway",
     "waybar":                           "~/.config/waybar",
+    "workstyle":                        "~/.config/workstyle",
     "tmux.conf":                        "~/.config/tmux/tmux.conf",
     "alacritty":                        "~/.config/alacritty",
     "overrides":                        "~/.local/share/flatpak/overrides",
@@ -18,19 +19,19 @@ mappings = {
     "python/pdbrc":                     "~/.pdbrc",
 }
 
-dotfiles_dir = Path(__file__).parent
+dotfiles_dir = Path(__file__).expanduser().absolute().parent
 
-for source, target in mappings.items():
-    source_path = dotfiles_dir / Path(source)
-    target_path = Path(target).expanduser()
+for target, link in mappings.items():
+    target_path = dotfiles_dir / Path(target)
+    link_path = Path(link).expanduser()
 
-    if target_path.exists():
+    if link_path.exists():
         continue
 
-    parent_directory = target_path.parent
+    parent_directory = link_path.parent
 
     if not parent_directory.exists():
         parent_directory.mkdir(parents=True, exist_ok=True)
 
-    target_path.symlink_to(source_path)
+    link_path.symlink_to(target_path)
 

@@ -59,3 +59,10 @@ def print_shell_cmd(cmd_args):
         get_line_groups(mklist(cmd_args, num_frames=2)),
     )
     print(" \\\n  ".join(lines))
+
+
+def print_args():
+    import shlex
+    import sys
+    print_shell_cmd(sys.argv)
+    print('\n{}'.format(shlex.join(sys.argv)))
