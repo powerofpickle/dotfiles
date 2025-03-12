@@ -17,6 +17,7 @@ mappings = {
     "overrides":                        "~/.local/share/flatpak/overrides",
     "mimeapps.list":                    "~/.config/mimeapps.list",
     "python/pdbrc":                     "~/.pdbrc",
+    "docker/config.json":               "~/.docker/config.json",
 }
 
 dotfiles_dir = Path(__file__).expanduser().absolute().parent
