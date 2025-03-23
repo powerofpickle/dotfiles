@@ -16,6 +16,11 @@ M.setup = function()
   --vim.keymap.set("n", prefix .. "fml", "<cmd>CellularAutomaton make_it_rain<CR>")
 end
 
+M.boole_mappings = {
+  increment = '<C-a>',
+  decrement = '<C-x>',
+}
+
 M.setup_nvim_tree = function()
   vim.keymap.set('n', '<C-i>', ':NvimTreeToggle<CR>') -- Toggle sidebar
   vim.keymap.set('n', prefix .. 'f', ':NvimTreeFindFile<CR>')

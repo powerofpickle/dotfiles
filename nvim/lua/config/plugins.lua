@@ -13,6 +13,14 @@ local plugin_config = {
   'folke/tokyonight.nvim',
   'sainnhe/everforest',
 
+  {
+    'nat-418/boole.nvim',
+    config = function()
+      require('boole').setup({
+        mappings = require("config.keymap").boole_mappings,
+      })
+    end
+  },
   'nvim-tree/nvim-web-devicons',
   --'eandrju/cellular-automaton.nvim',
   {
