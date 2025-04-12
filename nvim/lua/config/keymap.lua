@@ -22,11 +22,21 @@ M.boole_mappings = {
 }
 
 M.setup_nvim_tree = function()
-  vim.keymap.set('n', '<C-i>', ':NvimTreeToggle<CR>') -- Toggle sidebar
+  --vim.keymap.set('n', '<C-i>', ':NvimTreeToggle<CR>') -- Toggle sidebar
+  vim.keymap.set('n', prefix .. 't', ':NvimTreeToggle<CR>') -- Toggle sidebar
+  vim.keymap.set('n', prefix .. 'f', ':NvimTreeFindFile<CR>')
   vim.keymap.set('n', prefix .. 'f', ':NvimTreeFindFile<CR>')
 end
 
 M.setup_telescope = function()
+  local telescope = require('telescope')
+  telescope.setup {
+    defaults = {
+      layout_strategy = "vertical",
+      path_display = {"truncate"},
+    },
+  }
+
   local builtin = require('telescope.builtin')
 
   -- Telescope Default Bindings
