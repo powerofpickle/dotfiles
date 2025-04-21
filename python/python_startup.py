@@ -66,3 +66,24 @@ def print_args():
     import sys
     print_shell_cmd(sys.argv)
     print('\n{}'.format(shlex.join(sys.argv)))
+
+
+def pl():
+    import inspect
+    caller_frame = inspect.currentframe().f_back
+    file_name = caller_frame.f_code.co_filename
+    function_name = caller_frame.f_code.co_name
+    line_number = caller_frame.f_lineno
+    print(f"Called from: File '{file_name}', Function '{function_name}', Line {line_number}")
+
+
+def invert_dict_of_iterables(val):
+    from collections import defaultdict
+    r = defaultdict(set)
+    for key, vals in val.items():
+        for val in vals:
+            r[val].add(key)
+    return dict(r)
+
+
+vars = {}
