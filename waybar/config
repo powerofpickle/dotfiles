@@ -1,5 +1,6 @@
 {
     "layer": "top", // Waybar at top layer
+    //"position": "top", // Waybar at the bottom of your screen
     "position": "top", // Waybar at the bottom of your screen
     "height": 24, // Waybar height
     // "width": 1366, // Waybar width
@@ -53,7 +54,7 @@
             "warning": 30,
             "critical": 15
         },
-        "format": "{capacity}% {icon}",
+        "format": "{capacity}% {power} {cycles} {icon}",
         // "format-good": "", // An empty format will hide the module
         // "format-full": "",
         "format-icons": ["", "", "", "", ""]

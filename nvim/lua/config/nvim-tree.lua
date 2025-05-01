@@ -46,6 +46,8 @@ end
 local nvim_tree_config = {
   view = {
     preserve_window_proportions = true,
+    number = true,
+    relativenumber = true,
   },
   actions = {
     open_file = {
