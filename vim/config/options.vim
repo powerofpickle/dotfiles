@@ -39,3 +39,8 @@ endfunction
 
 call s:set_colorscheme(colorschemes)
 
+augroup CustomFileTypes
+    autocmd!
+    autocmd BufReadPost,BufNewFile *.h.inc,*.cpp.inc set filetype=cpp
+    autocmd BufReadPost,BufNewFile *.c.inc set filetype=c
+augroup END
