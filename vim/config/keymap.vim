@@ -21,7 +21,13 @@ vnoremap "" "sc"<C-r>s"<Esc>
 " NERDTree keymaps
 if !exists(':NvimTreeToggle')
     if exists(':NERDTreeToggle')
-        execute 'nnoremap ' . s:prefix . 'f :NERDTreeToggle<CR>'
+        execute 'nnoremap ' . s:prefix . 't :NERDTreeToggle<CR>'
         execute 'nnoremap ' . s:prefix . 'f :NERDTreeFind<CR>'
     end
 end
+
+command! Bd enew | bd #
+
+nnoremap tp :tabprev<CR>
+nnoremap tn :tabnext<CR>
+nnoremap tt :tabnew<CR>
