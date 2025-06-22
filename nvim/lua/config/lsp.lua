@@ -36,7 +36,7 @@ end
 
 local lsp_flags = {
   -- This is the default in Nvim 0.7+
-  debounce_text_changes = 150,
+  --debounce_text_changes = 150,
 }
 
 -- End copied section
@@ -85,6 +85,11 @@ local lua_ls_config = {
 }
 
 local setup_lspconfig = function()
+
+  -- Needed for nvim version >= 0.11
+  -- TODO check if this can be removed with future lspconfig version
+  vim.diagnostic.config({ virtual_text = true })
+
   local nvim_lsp = require('lspconfig')
 
   for _, lsp in ipairs(servers) do
