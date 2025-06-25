@@ -25,7 +25,6 @@ M.setup_nvim_tree = function()
   --vim.keymap.set('n', '<C-i>', ':NvimTreeToggle<CR>') -- Toggle sidebar
   vim.keymap.set('n', prefix .. 't', ':NvimTreeToggle<CR>') -- Toggle sidebar
   vim.keymap.set('n', prefix .. 'f', ':NvimTreeFindFile<CR>')
-  vim.keymap.set('n', prefix .. 'f', ':NvimTreeFindFile<CR>')
 end
 
 M.setup_telescope = function()

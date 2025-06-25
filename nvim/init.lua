@@ -72,3 +72,7 @@ vim.cmd[[
 ]]
 
 require('config.keymap').setup()
+
+if require('config.settings').force_osc52_clipboard then
+  vim.g.clipboard = 'osc52'
+end

@@ -4,16 +4,11 @@
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions
 local opts = { noremap=true, silent=true }
 vim.keymap.set('n', '<space>e', vim.diagnostic.open_float, opts)
-vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, opts)
-vim.keymap.set('n', ']d', vim.diagnostic.goto_next, opts)
 vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist, opts)
 
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
 local on_attach = function(client, bufnr)
-  -- Enable completion triggered by <c-x><c-o>
-  vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
-
   -- Mappings.
   -- See `:help vim.lsp.*` for documentation on any of the below functions
   local bufopts = { noremap=true, silent=true, buffer=bufnr }
@@ -49,6 +44,7 @@ local servers = {  -- Use default config for these servers
   'hls'
 }
 
+
 -- from :help lspconfig-all
 local lua_ls_config = {
   on_attach = on_attach,
@@ -68,38 +64,53 @@ local lua_ls_config = {
       -- Make the server aware of Neovim runtime files
       workspace = {
         checkThirdParty = false,
+        --[[
         library = {
           vim.env.VIMRUNTIME
           -- Depending on the usage, you might want to add additional paths here.
           -- "${3rd}/luv/library"
           -- "${3rd}/busted/library",
         }
+        ]]
         -- or pull in all of 'runtimepath'. NOTE: this is a lot slower
-        -- library = vim.api.nvim_get_runtime_file("", true)
+        library = vim.api.nvim_get_runtime_file("", true)
       }
     })
   end,
   settings = {
     Lua = {}
-  }
+  },
 }
 
 local setup_lspconfig = function()
+  local cmp_nvim_lsp_capabilities = require('cmp_nvim_lsp').default_capabilities()
+
+  local all = {
+    capabilities = cmp_nvim_lsp_capabilities,
+    on_attach = on_attach,
+    flags = lsp_flags,
+  }
 
   -- Needed for nvim version >= 0.11
-  -- TODO check if this can be removed with future lspconfig version
-  vim.diagnostic.config({ virtual_text = true })
+  -- TODO check if this can be removed in the future
+  vim.diagnostic.config({
+    --virtual_lines = true,
+    virtual_text = true,
+  })
 
-  local nvim_lsp = require('lspconfig')
+  --local nvim_lsp = require('lspconfig')
+
+  vim.lsp.config('*', all)
 
   for _, lsp in ipairs(servers) do
-    nvim_lsp[lsp].setup {
-      on_attach = on_attach,
-      flags = lsp_flags,
-    }
+    -- It should have already found lspconfig defaults
+    --vim.lsp.config(lsp, all)
+    vim.lsp.enable(lsp)
+    --nvim_lsp[lsp].setup(all)
   end
 
-  nvim_lsp.lua_ls.setup(lua_ls_config)
+  vim.lsp.config('lua_ls', lua_ls_config)
+  vim.lsp.enable('lua_ls')
 end
 
 return {
