@@ -31,3 +31,15 @@ command! Bd enew | bd #
 nnoremap tp :tabprev<CR>
 nnoremap tn :tabnext<CR>
 nnoremap tt :tabnew<CR>
+
+
+" Copy to clipboard
+vnoremap <C-c> "+y
+vnoremap <C-C> "+y
+
+" Paste from clipboard
+"nnoremap <C-v> "+p
+"inoremap <C-v> <C-r>+
+
+" Cut to clipboard
+"vnoremap <C-x> "+d
