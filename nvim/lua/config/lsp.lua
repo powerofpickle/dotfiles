@@ -38,10 +38,12 @@ local lsp_flags = {
 
 local servers = {  -- Use default config for these servers
   'clangd',
-  'pylsp',
+  --'pylsp',
   'gopls',
   'svls',
-  'hls'
+  'hls',
+  'nixd',
+  'basedpyright',
 }
 
 
@@ -100,16 +102,16 @@ local setup_lspconfig = function()
 
   --local nvim_lsp = require('lspconfig')
 
-  vim.lsp.config('*', all)
+  --vim.lsp.config('*', all)
 
   for _, lsp in ipairs(servers) do
     -- It should have already found lspconfig defaults
-    --vim.lsp.config(lsp, all)
+    vim.lsp.config(lsp, all)
     vim.lsp.enable(lsp)
     --nvim_lsp[lsp].setup(all)
   end
 
-  vim.lsp.config('lua_ls', lua_ls_config)
+  vim.lsp.config('lua_ls', vim.tbl_extend('force', lua_ls_config, all))
   vim.lsp.enable('lua_ls')
 end
 
