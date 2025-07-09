@@ -12,4 +12,7 @@ function fish_user_key_bindings
     fish_vi_key_bindings
     fish_default_key_bindings -M insert
     fish_vi_key_bindings --no-erase insert
+
+    # Make ctrl-n behave like default (emacs) keybinding instead of autocomplete
+    bind -M insert ctrl-n 'history-search-forward'
 end
