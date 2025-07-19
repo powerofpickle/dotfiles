@@ -13,6 +13,7 @@ local plugin_config = {
   'folke/tokyonight.nvim',
   'sainnhe/everforest',
 
+  'sindrets/diffview.nvim',
   {
     'nat-418/boole.nvim',
     config = function()
