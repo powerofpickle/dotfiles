@@ -22,9 +22,16 @@ M.boole_mappings = {
 }
 
 M.setup_nvim_tree = function()
-  --vim.keymap.set('n', '<C-i>', ':NvimTreeToggle<CR>') -- Toggle sidebar
   vim.keymap.set('n', prefix .. 't', ':NvimTreeToggle<CR>') -- Toggle sidebar
   vim.keymap.set('n', prefix .. 'f', ':NvimTreeFindFile<CR>')
+
+  local function cd_to_nvim_tree_root()
+    local core = require('nvim-tree.core')
+    local path = core.get_explorer().absolute_path
+    print('Changing PWD to ' .. path)
+    vim.cmd("cd " .. path)
+  end
+  vim.keymap.set('n', prefix .. 'cr', cd_to_nvim_tree_root)
 end
 
 M.setup_telescope = function()
