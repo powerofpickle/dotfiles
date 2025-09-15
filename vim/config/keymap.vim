@@ -31,6 +31,7 @@ command! Bd enew | bd #
 nnoremap tp :tabprev<CR>
 nnoremap tn :tabnext<CR>
 nnoremap tt :tabnew<CR>
+nnoremap tc :tabclose<CR>
 
 execute 'nnoremap ' . s:prefix . 'cpf :let @+ = expand("%:p")<CR>:echo "Full path copied to clipboard"<CR>'
 execute 'nnoremap ' . s:prefix . 'cpr :let @+ = expand("%")<CR>:echo "Relative path copied to clipboard"<CR>'
