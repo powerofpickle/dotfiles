@@ -43,9 +43,11 @@ local servers = {  -- Use default config for these servers
   'svls',
   'hls',
   'nixd',
-  'basedpyright',
 }
 
+local basedpyright_config = {
+  root_markers = {"pyrightconfig.json"},
+}
 
 -- from :help lspconfig-all
 local lua_ls_config = {
@@ -113,6 +115,11 @@ local setup_lspconfig = function()
 
   vim.lsp.config('lua_ls', vim.tbl_extend('force', lua_ls_config, all))
   vim.lsp.enable('lua_ls')
+
+  vim.lsp.config('basedpyright', vim.tbl_extend('force', basedpyright_config, all))
+  vim.lsp.enable('basedpyright')
+
+  vim.lsp.enable('verible')
 end
 
 return {
