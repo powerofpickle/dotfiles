@@ -44,3 +44,8 @@ augroup CustomFileTypes
     autocmd BufReadPost,BufNewFile *.h.inc,*.cpp.inc set filetype=cpp
     autocmd BufReadPost,BufNewFile *.c.inc set filetype=c
 augroup END
+
+if exists(':Copilot')
+    " Disable copilot by default
+    let g:copilot_enabled = v:false
+end

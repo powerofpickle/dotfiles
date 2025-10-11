@@ -46,3 +46,8 @@ vnoremap <C-C> "+y
 
 " Cut to clipboard
 "vnoremap <C-x> "+d
+"
+if exists(':Copilot')
+    execute 'nnoremap ' . s:prefix . 'coe :Copilot enable<CR>'
+    execute 'nnoremap ' . s:prefix . 'cod :Copilot disable<CR>'
+end
