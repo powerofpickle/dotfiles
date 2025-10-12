@@ -1,0 +1,14 @@
+#!/bin/sh
+set -eu
+
+script_dir=$(dirname -- "$0")
+calc_dir=$(dirname -- "$script_dir")
+
+. "$calc_dir/.venv/bin/activate"
+
+exec ipython \
+    --TerminalIPythonApp.display_banner=False \
+    --InteractiveShell.confirm_exit=False \
+    --TerminalInteractiveShell.true_color=True \
+    -i "$calc_dir/calc_imports.py" \
+    "$@"

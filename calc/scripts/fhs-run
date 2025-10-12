@@ -1,0 +1,17 @@
+#!/bin/sh
+set -eu
+
+save_args () {
+    for i do printf %s\\n "$i" | sed "s/'/'\\\\''/g;1s/^/'/;\$s/\$/' \\\\/" ; done
+    echo " "
+}
+quoted_args=$(save_args "$@")
+
+script_dir=$(dirname -- "$0")
+flake_dir=$(dirname -- "$script_dir")/nix
+
+exec nix \
+    --option warn-dirty false \
+    run "$flake_dir"#fhs \
+    -- \
+    -c "$quoted_args"

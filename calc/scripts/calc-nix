@@ -1,0 +1,4 @@
+#!/bin/sh
+set -eu
+script_dir=$(dirname -- "$0")
+exec sh "$script_dir/fhs-run" sh "$script_dir/calc"
