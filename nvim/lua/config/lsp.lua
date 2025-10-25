@@ -47,6 +47,19 @@ local servers = {  -- Use default config for these servers
 
 local basedpyright_config = {
   root_markers = {"pyrightconfig.json"},
+  settings = {
+    -- https://docs.basedpyright.com/dev/configuration/language-server-settings/
+    basedpyright = {
+      analysis = {
+        -- Without setting this, default is "recommended"
+        typeCheckingMode = "standard",
+        diagnosticSeverityOverrides = {
+          reportMissingImports = "none",
+          reportMissingModuleSource = "none",
+        },
+      },
+    },
+  },
 }
 
 -- from :help lspconfig-all

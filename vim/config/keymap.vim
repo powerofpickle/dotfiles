@@ -51,3 +51,8 @@ if exists(':Copilot')
     execute 'nnoremap ' . s:prefix . 'coe :Copilot enable<CR>'
     execute 'nnoremap ' . s:prefix . 'cod :Copilot disable<CR>'
 end
+
+if exists(':DiffviewOpen')
+    execute 'nnoremap ' . s:prefix . 'dvo :DiffviewOpen '
+    execute 'nnoremap ' . s:prefix . 'dvf :DiffviewFileHistory '
+end
