@@ -17,6 +17,8 @@ augroup END
 autocmd FileType python setlocal indentkeys-=<:>
 autocmd FileType python setlocal indentkeys-=:
 
+autocmd FileType c,cpp setlocal cinkeys-=:
+
 " colorschemes in order of preference
 let colorschemes = [
     \ 'catppuccin-macchiato',

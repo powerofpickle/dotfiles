@@ -1,5 +1,9 @@
 #ifdef __cplusplus
 #include <cstdint>
+#include <iostream>
+#include <sstream>
+#include <string_view>
+#include <vector>
 #else
 #include <stdint.h>
 #endif
@@ -38,7 +42,48 @@ FORCE_INLINE void breakpoint(void) {
 }
 
 #ifdef __cplusplus
+template<typename T>
+void print_var(const std::string_view name, const T& value) {
+    std::cout << name << "=" << value << std::endl;
+}
+
+template<typename T>
+std::string format_var(const std::string_view name, const T& value) {
+    std::ostringstream oss;
+    oss << name << "=" << value;
+    return oss.str();
+}
+
+template <typename T>
+struct DefaultHandler {
+    void operator()(const T& val) {
+        //std::cout << val << '\n';
+        dbg::breakpoint();
+    }
+};
+
+template <typename T, typename CallbackType = DefaultHandler<T>>
+class debug_vector : public std::vector<T> {
+private:
+    CallbackType callback;
+public:
+    using std::vector<T>::vector;
+    void push_back(const T& value) {
+        callback(value);
+        std::vector<T>::push_back(value);
+    }
+};
+
+#endif
+
+#ifdef __cplusplus
 } // namespace dbg
+#endif
+
+#ifdef __cplusplus
+#define NAME_AND_VAL(var) #var, var
+#define PRINT_VAR(var) dbg::print_var(NAME_AND_VAL(var))
+#define FORMAT_VAR(var) dbg::format_var(NAME_AND_VAL(var))
 #endif
 
 #undef FORCE_INLINE
