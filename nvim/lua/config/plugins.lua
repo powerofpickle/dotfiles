@@ -36,6 +36,9 @@ local plugin_config = {
     version = require("config.treesitter").plugin_version(),
   },
   {
+    'nvim-treesitter/nvim-treesitter-context',
+  },
+  {
     'nvim-telescope/telescope.nvim',
     requires = { {'nvim-lua/plenary.nvim'} },
     config = require("config.keymap").setup_telescope,

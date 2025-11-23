@@ -56,3 +56,8 @@ if exists(':DiffviewOpen')
     execute 'nnoremap ' . s:prefix . 'dvo :DiffviewOpen '
     execute 'nnoremap ' . s:prefix . 'dvf :DiffviewFileHistory '
 end
+
+if exists(':TSContext')
+    execute 'nnoremap ' . s:prefix . 'tsc :TSContext toggle<CR>'
+end
+
