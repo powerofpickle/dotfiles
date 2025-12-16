@@ -8,5 +8,6 @@ import pandas as pd
 
 try:
     import torch
+    from torch import tensor
 except ModuleNotFoundError:
     pass
