@@ -1,3 +1,6 @@
+#ifndef DEBUG_UTILS_H
+#define DEBUG_UTILS_H
+
 #ifdef __cplusplus
 #include <cstdint>
 #include <iostream>
@@ -19,6 +22,7 @@ namespace dbg {
 #endif
 
 FORCE_INLINE void breakpoint(void) {
+#if !defined(NO_BREAKPOINT)
 #if defined(__x86_64__) || defined(_M_X64) || defined(__i386__) || defined(_M_IX86)
     // x86/x86-64 architecture
     __asm__ volatile("int $0x03");
@@ -38,6 +42,7 @@ FORCE_INLINE void breakpoint(void) {
     // Fallback for other architectures - may not work everywhere
     volatile uintptr_t* p = 0;
     *p = 0;
+#endif
 #endif
 }
 
@@ -87,3 +92,5 @@ public:
 #endif
 
 #undef FORCE_INLINE
+
+#endif // #ifndef DEBUG_UTILS_H

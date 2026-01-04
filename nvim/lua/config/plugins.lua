@@ -13,6 +13,14 @@ local plugin_config = {
   'folke/tokyonight.nvim',
   'sainnhe/everforest',
 
+  {
+    "folke/which-key.nvim",
+    event = "VeryLazy",
+    opts = {
+    },
+    keys = require("config.keymap").which_key,
+  },
+
   'sindrets/diffview.nvim',
   {
     'nat-418/boole.nvim',

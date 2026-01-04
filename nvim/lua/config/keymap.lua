@@ -5,6 +5,29 @@ local prefix = ';'
 M.setup = function()
   vim.cmd[[source ~/.config/vim/config/keymap.vim]]
 
+  vim.keymap.set('n', prefix .. 'yp', function()
+    local relative_path = vim.fn.expand('%')
+    local line_number = vim.fn.line('.')
+    local result = relative_path .. ' ' .. line_number
+    vim.fn.setreg('+', result)
+    print('Copied: ' .. result)
+  end, {desc = 'Copy relative path with line number' })
+
+  vim.keymap.set('v', prefix .. 'yp', function()
+    local relative_path = vim.fn.expand('%')
+
+    local start_line = vim.fn.line('v')
+    local end_line = vim.fn.line('.')
+
+    if start_line > end_line then
+      start_line, end_line = end_line, start_line
+    end
+
+    local result = relative_path .. ' ' .. start_line .. ' ' .. end_line
+    vim.fn.setreg('+', result)
+    print('Copied: ' .. result)
+  end, {desc = 'Copy relative path with line number' })
+
   -- Center cursor after movements
   --[[
   local opts = {noremap=true, silent=true}
@@ -21,9 +44,27 @@ M.boole_mappings = {
   decrement = '<C-x>',
 }
 
+M.which_key = {
+  {  -- From example config
+    "<leader>?",
+    function()
+      require("which-key").show({ global = false })
+    end,
+    desc = "Buffer Local Keymaps (which-key)",
+  },
+  {
+    prefix .. "?",
+    function()
+      require("which-key").show({ global = true })
+    end,
+    desc = "Global Keymaps (which-key)",
+  },
+}
+
 M.setup_nvim_tree = function()
-  vim.keymap.set('n', prefix .. 't', ':NvimTreeToggle<CR>') -- Toggle sidebar
-  vim.keymap.set('n', prefix .. 'f', ':NvimTreeFindFile<CR>')
+  vim.keymap.set('n', '<space>f', ':NvimTreeToggle<CR>') -- Toggle sidebar
+  vim.keymap.set('n', prefix .. 'tt', ':NvimTreeToggle<CR>') -- Toggle sidebar
+  vim.keymap.set('n', prefix .. 'tf', ':NvimTreeFindFile<CR>')
 
   local function cd_to_nvim_tree_root()
     local core = require('nvim-tree.core')

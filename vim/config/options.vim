@@ -5,6 +5,11 @@ set shortmess+=I
 set wildmenu
 set wildmode=longest:full,full
 
+" Set timeout for mappings to 500ms
+"set timeoutlen=500
+" Set timeout for terminal key codes to 10ms
+"set ttimeoutlen=50
+
 " Show relative numbers when buffer is focused, otherwise show absolute numbers
 set number
 augroup numbertoggle

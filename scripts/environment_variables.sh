@@ -4,5 +4,5 @@ dotfiles_dir="$(dirname -- "$script_dir")"
 
 cat << EOF
 EDITOR=nvim
-PYTHONSTARTUP="$dotfiles_dir/python/python_startup.py
+PYTHONSTARTUP=$dotfiles_dir/python/python_startup.py
 EOF
