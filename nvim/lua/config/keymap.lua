@@ -62,7 +62,8 @@ M.which_key = {
 }
 
 M.setup_nvim_tree = function()
-  vim.keymap.set('n', '<space>f', ':NvimTreeToggle<CR>') -- Toggle sidebar
+  vim.keymap.set('n', '<space>t', ':NvimTreeToggle<CR>') -- Toggle sidebar
+  vim.keymap.set('n', '<space>f', ':NvimTreeFindFile<CR>')
   vim.keymap.set('n', prefix .. 'tt', ':NvimTreeToggle<CR>') -- Toggle sidebar
   vim.keymap.set('n', prefix .. 'tf', ':NvimTreeFindFile<CR>')
 
@@ -91,8 +92,9 @@ M.setup_telescope = function()
   vim.keymap.set('n', prefix .. 'fg', builtin.live_grep, {})
   local buffer_view = function()
     builtin.buffers({
-      sort_mru=true,
-      ignore_current_buffer=true,
+      sort_mru = true,
+      sort_lastused = true,
+      --ignore_current_buffer=true,
     })
   end
   vim.keymap.set('n', prefix .. 'fb', buffer_view, {})

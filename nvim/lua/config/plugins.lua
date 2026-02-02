@@ -45,6 +45,7 @@ local plugin_config = {
   },
   {
     'nvim-treesitter/nvim-treesitter-context',
+    enable = false;
   },
   {
     'nvim-telescope/telescope.nvim',

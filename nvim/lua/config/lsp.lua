@@ -2,7 +2,7 @@
 
 -- Mappings.
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions
-local opts = { noremap=true, silent=true }
+local opts = { noremap = true, silent = true }
 vim.keymap.set('n', '<space>e', vim.diagnostic.open_float, opts)
 vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist, opts)
 
@@ -11,7 +11,7 @@ vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist, opts)
 local on_attach = function(client, bufnr)
   -- Mappings.
   -- See `:help vim.lsp.*` for documentation on any of the below functions
-  local bufopts = { noremap=true, silent=true, buffer=bufnr }
+  local bufopts = { noremap = true, silent = true, buffer = bufnr }
   vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
   vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
   vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts)
@@ -26,7 +26,7 @@ local on_attach = function(client, bufnr)
   vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, bufopts)
   vim.keymap.set('n', '<space>ca', vim.lsp.buf.code_action, bufopts)
   vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
-  vim.keymap.set('n', '<space>f', function() vim.lsp.buf.format { async = true } end, bufopts)
+  --vim.keymap.set('n', '<space>f', function() vim.lsp.buf.format { async = true } end, bufopts)  -- Overridden by nvim-tree keymap
 end
 
 local lsp_flags = {
@@ -36,7 +36,7 @@ local lsp_flags = {
 
 -- End copied section
 
-local servers = {  -- Use default config for these servers
+local servers = { -- Use default config for these servers
   'clangd',
   --'pylsp',
   'gopls',
@@ -46,7 +46,7 @@ local servers = {  -- Use default config for these servers
 }
 
 local basedpyright_config = {
-  root_markers = {"pyrightconfig.json"},
+  root_markers = { "pyrightconfig.json" },
   settings = {
     -- https://docs.basedpyright.com/dev/configuration/language-server-settings/
     basedpyright = {
@@ -68,7 +68,7 @@ local lua_ls_config = {
   flags = lsp_flags,
   on_init = function(client)
     local path = client.workspace_folders[1].name
-    if vim.loop.fs_stat(path..'/.luarc.json') or vim.loop.fs_stat(path..'/.luarc.jsonc') then
+    if vim.loop.fs_stat(path .. '/.luarc.json') or vim.loop.fs_stat(path .. '/.luarc.jsonc') then
       return
     end
 
