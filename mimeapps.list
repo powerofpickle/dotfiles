@@ -8,5 +8,6 @@ x-scheme-handler/unknown=io.gitlab.librewolf-community.desktop
 image/jpeg=io.gitlab.librewolf-community.desktop
 image/png=io.gitlab.librewolf-community.desktop
 image/gif=io.gitlab.librewolf-community.desktop
+image/svg+xml=io.gitlab.librewolf-community.desktop
 
 video/mp4=org.videolan.VLC.desktop
